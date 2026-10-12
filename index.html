@@ -327,7 +327,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     </div>
     <form id="form" class="f" novalidate>
       <div><label for="nome">Nome</label><input id="nome" name="nome" autocomplete="name" required><div class="err" data-for="nome"></div></div>
-      <div><label for="zap">WhatsApp</label><input id="zap" name="zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" required><div class="err" data-for="zap"></div></div>
+      <div><label for="zap">WhatsApp</label><input id="zap" name="zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" maxlength="15" required><div class="err" data-for="zap"></div></div>
       <div><label for="seg">Qual é o seu segmento?</label>
         <select id="seg" name="seg" required>
           <option value="">Escolha uma opção</option>
@@ -351,6 +351,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <script>
 /* Formulário */
 const form=document.getElementById('form');
+document.getElementById('zap').addEventListener('input',e=>{
+  const n=e.target.value.replace(/\D/g,'').slice(0,11);
+  e.target.value=n.length>10?n.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3')
+    :n.length>6?n.replace(/^(\d{2})(\d{4})(\d{0,4}).*/,'($1) $2-$3')
+    :n.length>2?n.replace(/^(\d{2})(\d*)/,'($1) $2')
+    :n.length?'('+n:'';
+});
 form.addEventListener('submit',ev=>{
   ev.preventDefault();
   const d=Object.fromEntries(new FormData(form));
