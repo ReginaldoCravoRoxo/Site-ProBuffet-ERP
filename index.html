@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProBuffet ERP | Sistema de gestão para buffets</title>
+<meta name="description" content="Ficha técnica, lista de compras, agenda sem conflitos, CRM, financeiro e contratos em um só sistema feito para buffets e casas de festa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#042D50; --ink-2:#4A6078; --blue:#003A82; --blue-d:#002A63; --cyan:#00B2E0;
+  --paper:#EDF5FA; --white:#fff; --coral:#FF5A7E; --lemon:#FFC809; --mint:#25C9A0;
+  --line:rgba(4,45,80,.14);
+  --display:"Poppins",system-ui,sans-serif;
+  --text:"Instrument Sans",system-ui,sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+  --max:1200px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 1.0625rem/1.6 var(--text);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+h1,h2,h3{font-family:var(--display);line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700}
+h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600}
+h3{font-size:1.2rem;font-weight:600;line-height:1.3}
+p{max-width:62ch}
+.section{padding:clamp(64px,9vw,120px) 0}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;gap:.6rem;font:600 1rem var(--text);text-decoration:none;border:0;cursor:pointer;
+  background:var(--blue);color:#fff;padding:.95rem 1.5rem;border-radius:999px;transition:background .2s,transform .2s}
+.btn:hover{background:var(--blue-d)}
+.btn:active{transform:scale(.98)}
+.btn.light{background:var(--lemon);color:var(--ink)}
+.btn.light:hover{background:#fff}
+
+/* topo */
+.top{position:sticky;top:0;z-index:20;background:rgba(237,245,250,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center}
+.logo img{width:52px;height:52px}
+.top nav{display:flex;gap:28px;font-weight:500;font-size:.97rem}
+.top nav a{text-decoration:none;color:var(--ink-2)}
+.top nav a:hover{color:var(--ink)}
+.top .btn{padding:.65rem 1.15rem;font-size:.95rem}
+@media(max-width:820px){.top nav{display:none}}
+
+/* hero */
+.hero{padding:clamp(40px,6vw,88px) 0 clamp(56px,8vw,110px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1 .mark{background:linear-gradient(transparent 62%,var(--lemon) 62% 92%,transparent 92%)}
+.hero p.lead{margin:1.5rem 0 2rem;font-size:1.2rem;color:var(--ink-2)}
+.hero .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.hero .note{font-size:.95rem;color:var(--ink-2)}
+.pill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:2.2rem}
+.pill-list span{padding:.35rem .85rem;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:#fff}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr}}
+
+.shot img{width:100%;height:auto;filter:drop-shadow(0 30px 40px rgba(4,45,80,.25))}
+
+/* segmentos */
+.seg{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:2.5rem}
+.seg div{padding:22px 22px 8px 0}
+.seg div+div{padding-left:22px;border-left:1px solid var(--line)}
+.seg p{color:var(--ink-2);font-size:.98rem;margin-top:.4rem}
+@media(max-width:900px){.seg{grid-template-columns:1fr 1fr}.seg div:nth-child(3){padding-left:0;border-left:0}.seg div{padding-bottom:20px}}
+@media(max-width:520px){.seg{grid-template-columns:1fr}.seg div,.seg div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+
+.two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:center}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
+.two p{margin-top:1.1rem;color:var(--ink-2)}
+.journey{background:var(--white);border-block:1px solid var(--line)}
+.journey .two{align-items:start}
+.steps{list-style:none;padding:0;counter-reset:s;position:relative}
+.steps::before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--cyan);opacity:.4}
+.steps li{counter-increment:s;position:relative;padding:0 0 28px 64px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:600 1rem var(--display)}
+.steps li:last-child::before{background:var(--cyan);color:var(--ink)}
+.steps p{margin-top:.25rem;color:var(--ink-2);font-size:1rem}
+
+/* recursos */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:3rem}
+.cell{border-radius:22px;padding:28px;background:#fff;border:1px solid var(--line)}
+.cell ul{list-style:none;padding:0;margin-top:1rem;display:grid;gap:.55rem}
+.cell li{padding-left:1.6rem;position:relative;font-size:1rem}
+.cell li::before{content:"";position:absolute;left:0;top:.5em;width:.7rem;height:.7rem;border-radius:3px;background:currentColor;opacity:.9}
+.cell p{margin-top:.6rem;opacity:.85;font-size:1rem}
+.c1{grid-column:span 4;background:var(--blue);color:#fff;border-color:transparent;display:grid;grid-template-columns:1fr 1fr;gap:20px 36px}
+.c1 h3{grid-column:1/-1;font-size:clamp(1.6rem,3vw,2.2rem)}
+.c1 ul{margin:0}
+.c1 li::before{background:var(--cyan)}
+.c2{grid-column:span 2;background:var(--lemon);border-color:transparent}
+.c3{grid-column:span 3}
+.c4{grid-column:span 3;background:var(--ink);color:#fff;border-color:transparent}
+.c4 li::before{background:var(--mint)}
+.c3 li::before{background:var(--coral)}
+.c2 li::before{background:var(--ink)}
+@media(max-width:900px){.c1,.c2,.c3,.c4{grid-column:1/-1}.c1{grid-template-columns:1fr}}
+
+/* resultados */
+.results{background:var(--ink);color:#fff}
+.results h2{max-width:20ch}
+.res{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,56px);margin:3rem 0 2.5rem}
+.res div{border-top:3px solid var(--cyan);padding-top:18px}
+.res div:nth-child(2){border-color:var(--lemon)}
+.res div:nth-child(3){border-color:var(--cyan)}
+.res h3{font-size:1.5rem}
+.res p{margin-top:.6rem;color:rgba(255,255,255,.75);font-size:1rem}
+@media(max-width:800px){.res{grid-template-columns:1fr}}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,6vw,80px)}
+@media(max-width:860px){.faq-grid{grid-template-columns:1fr}}
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--ink)}
+summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font:600 1.05rem var(--display);position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:50%;translate:0 -50%;font:500 1.8rem var(--text);color:var(--blue);transition:rotate .25s}
+details[open] summary::after{rotate:45deg}
+details p{padding:0 0 22px;color:var(--ink-2)}
+
+/* formulário */
+.cta{background:var(--blue);color:#fff}
+.cta .two p{color:rgba(255,255,255,.85)}
+form{background:#fff;color:var(--ink);border-radius:22px;padding:clamp(20px,3vw,32px);display:grid;gap:16px}
+.f label,.f legend{display:block;font-weight:600;font-size:.95rem;margin-bottom:6px}
+.f input,.f select{width:100%;font:400 1rem var(--text);padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+.f input:focus,.f select:focus{outline:3px solid var(--blue);outline-offset:1px;background:#fff}
+fieldset{border:0;padding:0}
+.radios{display:flex;gap:10px}
+.radios label{flex:1;display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;margin:0;font-weight:500}
+.radios input{width:auto;accent-color:var(--blue)}
+.radios label:has(input:checked){border-color:var(--blue);background:#E6F6FC;}
+form .btn{justify-content:center;width:100%}
+.ok-box{display:none;background:var(--mint);color:var(--ink);border-radius:14px;padding:16px 18px;font-weight:600}
+.err{color:#C8274D;font-size:.88rem;min-height:1.1em;margin-top:4px}
+
+footer{padding:36px 0;font-size:.95rem;color:var(--ink-2)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* entrada do hero (única animação automática) */
+@media(prefers-reduced-motion:no-preference){
+  .hero h1,.hero .lead,.hero .row,.shot{animation:in .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .lead{animation-delay:.1s}.hero .row{animation-delay:.2s}.shot{animation-delay:.3s}
+  @keyframes in{from{opacity:0;translate:0 16px}}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="ProBuffet, início"><img src="assets/logo.png" alt="ProBuffet"></a>
+    <nav aria-label="Principal">
+      <a href="#segmentos">Para quem</a>
+      <a href="#jornada">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="btn" href="#agendar">Quero uma demonstração</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Um buffet <span class="mark">previsível</span> e lucrativo, da proposta ao pós-festa.</h1>
+      <p class="lead">O ProBuffet reúne ficha técnica, lista de compras, agenda, financeiro e contratos. Você sabe o custo e a margem de cada festa antes de fechar.</p>
+      <div class="row">
+        <a class="btn" href="#agendar">Quero uma demonstração</a>
+        <span class="note">Suporte direto no WhatsApp, sem ticket.</span>
+      </div>
+      <div class="pill-list" aria-label="Feito para">
+        <span>Buffets infantis</span><span>Espaços de eventos</span><span>Buffets itinerantes</span><span>Casas de festas</span>
+      </div>
+    </div>
+
+    <figure class="shot"><img src="assets/laptop.png" width="1600" height="1265" alt="Painel do ProBuffet com vendas do ano, CRM de vendas e gráficos mensais"></figure>
+  </div>
+</section>
+
+<section class="section" id="segmentos" style="padding-top:0">
+  <div class="wrap">
+    <h2>Feito só para quem vive de festa.</h2>
+    <div class="seg">
+      <div><h3>Buffets infantis</h3><p>Monitores, brinquedos e cardápio por faixa etária.</p></div>
+      <div><h3>Espaços de eventos</h3><p>Salões, datas e horários sem sobreposição.</p></div>
+      <div><h3>Buffets itinerantes</h3><p>Compras e equipe calculadas para cada endereço.</p></div>
+      <div><h3>Casas de festas</h3><p>Do primeiro contato do cliente ao contrato assinado.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section journey" id="jornada">
+  <div class="wrap two">
+    <div>
+      <h2>Do primeiro contato ao pós-evento, tudo no mesmo cadastro.</h2>
+      <p>O cliente é cadastrado uma vez. Orçamento, contrato, compras, equipe e financeiro usam essa mesma informação, sem digitar de novo.</p>
+      <a class="btn" href="#agendar" style="margin-top:1.8rem">Quero uma demonstração</a>
+    </div>
+    <ol class="steps">
+      <li><h3>Contato e negociação</h3><p>O CRM guarda cada lead e em que etapa da negociação ele está.</p></li>
+      <li><h3>Orçamento com margem</h3><p>A precificação usa suas fichas técnicas. Você sabe o lucro antes de fechar.</p></li>
+      <li><h3>Contrato automático</h3><p>Sai pronto com os dados do cliente e do evento.</p></li>
+      <li><h3>Data sem conflito</h3><p>A agenda inteligente impede duas festas no mesmo espaço e horário.</p></li>
+      <li><h3>Compras e estoque</h3><p>A lista é montada pelo cardápio, pelo número de convidados e pelos fornecedores.</p></li>
+      <li><h3>Dia da festa</h3><p>Checklists e protocolos guiam a equipe, mesmo sem você no salão.</p></li>
+      <li><h3>Resultado</h3><p>Financeiro e indicadores mostram quanto cada festa deixou de lucro.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="recursos">
+  <div class="wrap">
+    <h2>Tudo que o seu buffet usa, num lugar só.</h2>
+    <div class="bento">
+      <div class="cell c1">
+        <h3>Gestão completa da festa</h3>
+        <ul>
+          <li>Ficha técnica dos pratos</li>
+          <li>Lista de compras automática</li>
+          <li>Controle de estoque</li>
+          <li>Precificação e orçamentos</li>
+        </ul>
+        <ul>
+          <li>Gerenciamento de festas</li>
+          <li>Checklist e protocolos</li>
+          <li>Indicadores de resultado</li>
+          <li>Agenda inteligente</li>
+        </ul>
+      </div>
+      <div class="cell c2">
+        <h3>Dinheiro e clientes</h3>
+        <ul><li>Controle financeiro completo</li><li>CRM integrado</li><li>Contratos automáticos</li></ul>
+      </div>
+      <div class="cell c3">
+        <h3>Sua equipe inteira dentro</h3>
+        <p>Usuários ilimitados, sem taxa por pessoa. Treinamento completo para o time.</p>
+      </div>
+      <div class="cell c4">
+        <h3>Do nosso lado</h3>
+        <ul><li>Implantação 100% feita por nós</li><li>Suporte online com grupo no WhatsApp</li><li>Time especialista em buffet</li><li>Atualizações constantes sem custo extra</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section results">
+  <div class="wrap">
+    <h2>Menos improviso. Mais controle do que entra e sai.</h2>
+    <div class="res">
+      <div><h3>Proteção contra roubos</h3><p>Compras, estoque e saídas ficam registrados, então a diferença aparece.</p></div>
+      <div><h3>Mais de 50% de eficiência</h3><p>Orçamento, contrato e lista de compras saem do mesmo cadastro.</p></div>
+      <div><h3>Fora da operação</h3><p>Processos e checklists para a equipe tocar a festa sem você no salão.</p></div>
+    </div>
+    <a class="btn light" href="#agendar">Quero uma demonstração</a>
+  </div>
+</section>
+
+<section class="section" id="duvidas">
+  <div class="wrap faq-grid">
+    <h2>Dúvidas comuns antes de começar.</h2>
+    <div>
+      <details><summary>Substitui minhas planilhas e outros sistemas?</summary><p>Sim. Financeiro, CRM, gestão de eventos, lista de compras e contratos ficam em um único lugar.</p></details>
+      <details><summary>Quanto tempo leva para aprender?</summary><p>A implantação é feita pela nossa equipe. Você conta com suporte ilimitado pelo WhatsApp e reuniões quando precisar.</p></details>
+      <details><summary>Gera contratos sozinho?</summary><p>Sim. Depois de uma configuração inicial, o contrato sai pronto com os dados do cliente e do evento.</p></details>
+      <details><summary>Quantas pessoas da equipe podem usar?</summary><p>Quantas você quiser. Não cobramos por usuário.</p></details>
+      <details><summary>A lista de compras é automática?</summary><p>Sim. Ela considera o cardápio, o número de convidados, os fornecedores e os padrões do seu buffet.</p></details>
+      <details><summary>Como funciona o suporte?</summary><p>Você fala direto pelo WhatsApp, sem ticket e sem agendar. Quando for preciso, fazemos videochamada, sem custo adicional.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" id="agendar">
+  <div class="wrap two">
+    <div>
+      <h2>Receba um plano personalizado para o seu buffet.</h2>
+      <p>Responda quatro perguntas rápidas e agende uma demonstração.</p>
+    </div>
+    <form id="form" class="f" novalidate>
+      <div><label for="nome">Nome</label><input id="nome" name="nome" autocomplete="name" required><div class="err" data-for="nome"></div></div>
+      <div><label for="zap">WhatsApp</label><input id="zap" name="zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" required><div class="err" data-for="zap"></div></div>
+      <div><label for="seg">Qual é o seu segmento?</label>
+        <select id="seg" name="seg" required>
+          <option value="">Escolha uma opção</option>
+          <option>Buffet</option><option>Buffet infantil</option><option>Buffet itinerante</option><option>Buffet de eventos em geral</option>
+          <option>Assessor de eventos</option><option>Cerimonialista</option><option>Decorador</option><option>Dono de restaurante</option><option>Doceria</option><option>Outro</option>
+        </select><div class="err" data-for="seg"></div></div>
+      <fieldset><legend>É prioridade ter um software agora?</legend>
+        <div class="radios"><label><input type="radio" name="prio" value="Sim" checked>Sim</label><label><input type="radio" name="prio" value="Não">Não</label></div>
+      </fieldset>
+      <button class="btn" type="submit">Quero uma demonstração</button>
+      <div class="ok-box" id="ok" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© PRO BUFFET ERP. Todos os direitos reservados.</span><span>O sistema de gestão ideal para o seu buffet.</span></div>
+</footer>
+
+<script>
+/* Formulário */
+const form=document.getElementById('form');
+form.addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const d=Object.fromEntries(new FormData(form));
+  const errs={};
+  if(!d.nome.trim()) errs.nome='Informe seu nome.';
+  if(d.zap.replace(/\D/g,'').length<10) errs.zap='Informe o WhatsApp com DDD.';
+  if(!d.seg) errs.seg='Escolha o seu segmento.';
+  document.querySelectorAll('.err').forEach(x=>x.textContent=errs[x.dataset.for]||'');
+  if(Object.keys(errs).length){form.querySelector('[aria-invalid],input,select');document.getElementById(Object.keys(errs)[0]).focus();return}
+  /* TODO: enviar os dados ao backend/CRM ou abrir o WhatsApp da empresa */
+  const ok=document.getElementById('ok');
+  ok.style.display='block';
+  ok.textContent=`Recebemos, ${d.nome.trim().split(' ')[0]}. Vamos chamar você no WhatsApp para agendar a demonstração.`;
+  form.reset();
+});
+</script>
+</body>
+</html>
