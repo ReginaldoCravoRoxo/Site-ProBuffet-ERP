@@ -433,6 +433,12 @@ form.addEventListener('submit',ev=>{
   const ok=document.getElementById('ok');
   const btn=form.querySelector('button[type=submit]');
   btn.disabled=true;
+  fetch('https://script.google.com/macros/s/AKfycby5UrSlY3RX35yj_tW4U7UgMvbYWSb6_Xgf60ZMpSGLQCicxpv699SV7q7BQWNLAXlF/exec',{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({nome:d.nome.trim(),zap:d.zap.trim(),seg:d.seg,prio:d.prio})
+  }).catch(()=>{});
   fetch('https://formsubmit.co/ajax/probuffeterp@gmail.com',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
