@@ -452,13 +452,13 @@ form.addEventListener('submit',ev=>{
     })
   }).then(r=>{
     if(!r.ok) throw new Error(r.status);
-    ok.style.display='block';
-    ok.textContent=`Recebemos, ${d.nome.trim().split(' ')[0]}. Vamos chamar você no WhatsApp para agendar a demonstração.`;
     form.reset();
+    location.href='obrigado.html?n='+encodeURIComponent(d.nome.trim().split(' ')[0]);
   }).catch(()=>{
     ok.style.display='block';
     ok.textContent='Não foi possível enviar agora. Tente novamente em instantes.';
-  }).finally(()=>{btn.disabled=false});
+    btn.disabled=false;
+  });
 });
 </script>
 </body>

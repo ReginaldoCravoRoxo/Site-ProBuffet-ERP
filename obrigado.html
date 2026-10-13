@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Obrigado! | ProBuffet ERP</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#042D50;--ink-2:#4A6078;--blue:#003A82;--blue-d:#002A63;--paper:#EDF5FA;--mint:#25C9A0;--display:"Poppins",system-ui,sans-serif;--text:"Instrument Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--paper);color:var(--ink);font-family:var(--text);line-height:1.6}
+.card{max-width:560px;width:100%;background:#fff;border-radius:24px;padding:48px 32px;text-align:center;box-shadow:0 20px 50px rgba(4,45,80,.12)}
+.check{width:72px;height:72px;margin:0 auto 24px;border-radius:50%;background:var(--mint);display:grid;place-items:center}
+.check svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+h1{font-family:var(--display);font-size:clamp(26px,5vw,34px);line-height:1.2;margin-bottom:12px;text-wrap:balance}
+p{color:var(--ink-2);font-size:18px;margin-bottom:32px}
+a{display:inline-block;background:var(--blue);color:#fff;font-family:var(--display);font-weight:600;text-decoration:none;padding:14px 32px;border-radius:999px}
+a:hover{background:var(--blue-d)}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <h1 id="titulo">Obrigado!</h1>
+  <p>Recebemos o seu contato com carinho. Em breve nossa equipe vai chamar você no WhatsApp para agendar a sua demonstração.</p>
+  <a href="index.html">Voltar ao site</a>
+</main>
+<script>
+const n=new URLSearchParams(location.search).get('n');
+if(n) document.getElementById('titulo').textContent='Obrigado, '+n.slice(0,40)+'!';
+</script>
+</body>
+</html>
