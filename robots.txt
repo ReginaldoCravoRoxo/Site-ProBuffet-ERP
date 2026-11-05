@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /obrigado.html
+
+Sitemap: https://probuffeterp.com.br/sitemap.xml
