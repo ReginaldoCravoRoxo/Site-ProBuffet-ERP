@@ -413,6 +413,26 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </footer>
 
 <script>
+/* Captura UTMs/click IDs e repassa ao formulário (Respondi) e ao WhatsApp */
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'],S='pb_utm',p={};
+  try{
+    var q=new URLSearchParams(location.search),f={};
+    K.forEach(function(k){if(q.get(k))f[k]=q.get(k)});
+    if(Object.keys(f).length)sessionStorage.setItem(S,JSON.stringify(f));
+    p=JSON.parse(sessionStorage.getItem(S)||'{}');
+  }catch(e){}
+  var ks=Object.keys(p);if(!ks.length)return;
+  document.querySelectorAll('a[href^="https://form.respondi.app"]').forEach(function(a){
+    var u=new URL(a.href);ks.forEach(function(k){u.searchParams.set(k,p[k])});a.href=u.toString();
+  });
+  var w=document.querySelector('a[href^="https://wa.me"]');
+  if(w){
+    var u=new URL(w.href),t=u.searchParams.get('text')||'';
+    u.searchParams.set('text',t+' (origem: '+[p.utm_source,p.utm_campaign].filter(Boolean).join(' / ')+')');
+    w.href=u.toString();
+  }
+})();
 /* Revelar ao rolar */
 if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
